@@ -1,0 +1,40 @@
+﻿<Window x:Class="MDClone.WarningWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MDClone"
+        mc:Ignorable="d"
+         Title="Login" WindowStyle="None" Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing" Topmost="True">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ButtonStyleDictionary.xaml"  />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid >
+        <Border BorderBrush="Black" BorderThickness="1" Background="White"  Width="580" Height="340" 
+                CornerRadius="20" VerticalAlignment="Center"  HorizontalAlignment="Center">
+            <Border.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black"  Opacity="0.9" Direction="270" ShadowDepth="0.8" />
+            </Border.BitmapEffect>
+            <Viewbox>
+                <StackPanel Margin="10">
+                    <Button x:Name="btnClose"    HorizontalAlignment="Right"   Width="35" Height="35"  Click="CloseWindow_Click" Margin="0,5,20,0" />
+
+                    <Label x:Name="textLb"  FontSize="35" HorizontalContentAlignment="Center"  Margin="25,55,5,5"/>
+                    <StackPanel Orientation="Horizontal" Margin="20,30,20,0">
+                        <Label  Height="40" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="00,50,0,0" Width="580">
+                        <Label x:Name="lblInvisible" Width="120"/>
+                        <Button x:Name="btnOk"  Content="Ok" Width="160" Height="40"  Margin="0,0,50,0"  Click="Ok_Click" FontSize="25" />
+                        <Button x:Name="btnCancel" Content="Cancel"  Width="160" Height="40" Click="Cancel_Click" FontSize="25" FontWeight="Bold" />
+                    </StackPanel>
+
+                </StackPanel>
+            </Viewbox>
+        </Border>
+    </Grid>
+</Window>

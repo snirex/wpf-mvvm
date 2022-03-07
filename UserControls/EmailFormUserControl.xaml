@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="MDClone.UserControls.EmailFormUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MDClone.UserControls" 
+             xmlns:viewmodels="clr-namespace:MDClone.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:EmailViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400" Background="AliceBlue">
+    <UserControl.DataContext>
+        <viewmodels:EmailViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MDClone;component/Resources/ButtonStyleDictionary.xaml"  />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"  >
+
+        <StackPanel>
+            <Button Command="{Binding CloseTabCommand}" Content="X" Width="40"  HorizontalAlignment="Right" FontWeight="Bold"  
+                    Style="{StaticResource RedMouseOver}" Margin="5,5,14,0" />
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="From:" Width="80"/>
+                <TextBox  Width="200">
+                    <TextBox.Text>
+                        <Binding Path="FromAddress" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <viewmodels:ValidationRuleOfStrudel ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,0,0,5">
+                <TextBlock Text="To:" Width="80"/>
+                <TextBox  Width="200">
+                    <TextBox.Text>
+                        <Binding Path="ToAddress" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <viewmodels:ValidationRuleOfStrudel ValidationStep="RawProposedValue"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,0,0,5">
+                <TextBlock Text="Subject:" Width="80"/>
+                <TextBox  Text="{Binding  Subject}" Width="300" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,0,0,5">
+                <TextBlock Text="Body:" Width="80"/>
+                <TextBox TextWrapping="Wrap" Text="{Binding Body}" Width="300" Height="200"/>
+            </StackPanel>
+            <Button Content="Send" Command="{Binding SendEmailCommand}" Width="150" HorizontalAlignment="Left" Margin="150,0,0,0"/>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

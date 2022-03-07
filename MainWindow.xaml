@@ -1,0 +1,72 @@
+﻿<Window x:Class="MDClone.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MDClone" xmlns:viewmodels="clr-namespace:MDClone.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:general="clr-namespace:MDClone.GeneralClasses"
+        mc:Ignorable="d"
+        Title="MDCLONE " Height="550" Width="1200" WindowStartupLocation="CenterScreen"  ResizeMode="NoResize" AllowsTransparency="True" WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/DatatGridStyleDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ScrollBarStyleDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ButtonStyleDictionary.xaml" />
+                <ResourceDictionary Source="Resources/TabItem.xaml" />
+
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,1200,550" RadiusX="10" RadiusY="10"/>
+    </Window.Clip>
+    <Grid >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Height="40"  MouseMove="Grid_MouseMove" ToolTip="Drag window from here">
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Binding ElementName=tc, Path=SelectedItem.Header}"/>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="1">
+                <StackPanel>
+                    <Button Margin="0,40,0,10"  Content="Add Data Table"
+                            Command="{Binding AddNewTabCommand}" CommandParameter="DataTable"
+                            Height="30" Width="100" />
+
+                    <Button Content="Add Email Form"  
+                            Command="{Binding AddNewTabCommand}" CommandParameter="Email"
+                            Height="30" Width="100" />
+
+                    <StackPanel  Margin="7,340,0,0" >
+                        <Border >
+                            <StackPanel Orientation="Horizontal"  Cursor="Hand"  >
+                                <Button Height="40" Width="40" Command="{Binding ExitCommand}">
+                                    <Image Source="Assets/TurnOff.png" Height="35" Width="35" />
+                                </Button>
+
+                                <TextBlock Text="Exit" Width="60" FontSize="25" TextAlignment="Center" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <TabControl  Name="tc" ItemsSource="{Binding Tabs}"  Grid.Column="1" Grid.Row="1" 
+                         SelectedItem="{Binding SelectedTab}"
+                         Background="{x:Null}" BorderBrush="{x:Null}" />
+
+        </Grid>
+    </Grid>
+</Window>
